@@ -45,7 +45,7 @@ func handle(c net.Conn) {
 
 	wsize, err := c.Write(data)
 	if err != nil {
-		log.Printf("write error (%d of %d bytes were written)", wsize, rsize)
+		log.Printf("write error (%d of %d bytes were written): %s", wsize, rsize, err.Error())
 		return
 	}
 }
