@@ -9,6 +9,8 @@ import (
 )
 
 var (
+	advertFlag = flag.Bool("advertise", false, "advertise sshd version by displaying banner")
+	bannerFlag = flag.String("banner", "SSH-2.0-OpenSSH_5.3", "sshd banner to present (none if blank)")
 	listenFlag = flag.String("listen", ":2222", "address to listen on")
 	sizeFlag   = flag.Int("size", 1024*1024, "size in bytes of data to send")
 )
@@ -31,6 +33,14 @@ func handle(c net.Conn) {
 	if err != nil {
 		log.Println("can't read:", err)
 		return
+	}
+
+	if *advertFlag {
+		_, err = c.Write([]byte(*bannerFlag))
+		if err != nil {
+			log.Printf("can't write banner:", err)
+			return
+		}
 	}
 
 	wsize, err := c.Write(data)
