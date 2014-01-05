@@ -9,7 +9,7 @@ import (
 )
 
 var (
-	listenFlag = flag.String("listen", ":2020", "address to listen on")
+	listenFlag = flag.String("listen", ":2222", "address to listen on")
 	sizeFlag   = flag.Int("size", 1024*1024, "size in bytes of data to send")
 )
 
