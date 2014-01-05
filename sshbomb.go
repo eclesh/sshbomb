@@ -36,7 +36,7 @@ func handle(c net.Conn) {
 	}
 
 	if *advertFlag {
-		_, err = c.Write([]byte(*bannerFlag))
+		_, err = c.Write([]byte(*bannerFlag + "\n"))
 		if err != nil {
 			log.Printf("can't write banner:", err)
 			return
